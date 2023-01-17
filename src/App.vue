@@ -1,3 +1,4 @@
+
 <template>
 	<div class="min-h-screen bg-gray-100">
 		<div class="container py-10">
@@ -56,6 +57,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
 	name: "App",
 	data() {
