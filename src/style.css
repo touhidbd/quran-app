@@ -3,18 +3,22 @@
 @tailwind utilities;
 
 .container {
-    max-width: 800px;
+    max-width: 900px;
     @apply mx-auto;
 }
 
 .quran-input {
-    @apply border border-gray-200 rounded px-4 py-2 cursor-pointer w-full;
+    @apply rounded px-4 py-2 cursor-pointer w-full bg-green-400
 }
 
 .single-ayah {
-    @apply mb-2 border-b py-2
+    @apply mb-2 p-3 flex bg-gradient-to-r from-green-400 to-green-500 rounded items-center
 }
 
 .ayah-number {
-    @apply text-xs bg-yellow-600 text-white inline-flex items-center justify-center w-10 h-10 rounded-full border-gray-500 border-2 mr-3 font-bold
+    @apply text-xs bg-green-600 text-white inline-flex items-center justify-center w-10 h-10 rounded-full mr-3 font-bold
+}
+
+.ayat-text {
+    @apply flex-1
 }
