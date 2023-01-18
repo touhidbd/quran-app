@@ -16,9 +16,13 @@
 }
 
 .ayah-number {
-    @apply text-xs bg-green-600 text-white inline-flex items-center justify-center w-10 h-10 rounded-full mr-3 font-bold
+    @apply text-lg bg-green-600 text-white inline-flex items-center justify-center w-10 h-10 rounded-full mr-3 font-bold
 }
 
 .ayat-text {
-    @apply flex-1
+    @apply flex-1;
+}
+
+.rtl-grid {
+    direction: rtl;
 }
