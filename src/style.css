@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .container {
-    max-width: 900px;
+    max-width: 1170px;
     @apply mx-auto;
 }
 
@@ -17,6 +17,10 @@
 
 .ayah-number {
     @apply text-lg bg-green-600 text-white inline-flex items-center justify-center w-10 h-10 rounded-full mr-3 font-bold
+}
+
+.single-ayah.rtl-grid .ayah-number {
+    @apply mr-0 ml-3
 }
 
 .ayat-text {

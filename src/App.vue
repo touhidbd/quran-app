@@ -6,10 +6,13 @@
 			<div class="bg-green-500 text-white p-4 shadow rounded">
 				<div class="text-center mb-4">
 
-					<h1 class="text-2xl mb-3">بِسْمِ ٱللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</h1>
-					<h3 class="font-bold">{{ currentSurah.englishName }} ({{ currentSurah.name }})</h3>
-					<h6 class="font-bold">{{ currentSurah.englishNameTranslation }}</h6>
-					<p>Ayahs: <strong>{{ currentSurah.numberOfAyahs }}</strong></p>
+					<div class="p-2 bg-green-400 rounded">
+						<h1 class="text-2xl mb-3">بِسْمِ ٱللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</h1>
+						<h3 class="font-bold">{{ currentSurah.englishName }} ({{ currentSurah.name }})</h3>
+						<h6 class="font-bold">{{ currentSurah.englishNameTranslation }}</h6>
+						<p>Ayahs: <strong>{{ currentSurah.numberOfAyahs }}</strong></p>
+					</div>
+
 					<select class="quran-input focus: outline-none mt-3" @change="getSpecificSurah">
 						<option v-for="surah in surahs" :key="surah.number">
 							{{ surah.number }}. {{
@@ -31,30 +34,24 @@
 					<span class="font-bold ml-2 text-white animate-pulse">Loading...</span>
 				</div>
 
-				<div v-else="loading" class="ayahs-wrapper h-[calc(100vh-200px)] overflow-auto">
-					<div class="single-ayah" v-if="currentSurah.hasOwnProperty('ayahs')"
-						v-for="ayah in currentSurah.ayahs" :key="ayah.numberInSurah">
+				<div v-else="loading" class="ayahs-wrapper h-[calc(100vh-290px)] overflow-auto">
 
-						<div class="ayah-number">
-							{{ ayah.numberInSurah }}
+					<div v-for="(singleAyah, i) in currentSurah">
+
+						<div :class="[i === 0 ? 'rtl-grid' : '']" class="single-ayah" v-if="singleAyah.hasOwnProperty('ayahs')"
+							v-for="ayah in singleAyah.ayahs" :key="ayah.numberInSurah">
+
+							<div class="ayah-number">
+								{{ ayah.numberInSurah }}
+							</div>
+							<div class="ayat-text">
+								{{ ayah.text }}
+							</div>
 						</div>
-						<div class="ayat-text rtl-grid">
-							{{ ayah.text }}
-						</div>
+
 					</div>
+
 				</div>
-
-				<!-- <div v-else="loading" class="ayahs-wrapper h-[calc(100vh-200px)] overflow-auto">
-					<div class="single-ayah" v-if="currentSurah.hasOwnProperty('ayahs')"
-						v-for="ayah in currentSurah.ayahs">
-						<div class="ayah-number">
-							{{ ayah.numberInSurah }}
-						</div>
-						<div class="ayat-text rtl-grid">
-							{{ ayah.text }}
-						</div>
-					</div>
-				</div> -->
 
 			</div>
 		</div>
@@ -72,7 +69,7 @@ export default {
 			selectedNumber: 1,
 			surahs: [],
 			currentSurah: [],
-			loading: true
+			loading: true,
 		}
 	},
 	mounted() {
@@ -88,12 +85,12 @@ export default {
 		},
 		quarySpacificSurah(surahNumber) {
 			this.loading = true;
-			axios.get('https://api.alquran.cloud/v1/surah/' + surahNumber + '/editions/quran-uthmani')
-				.then(response => {
+			axios.get('https://api.alquran.cloud/v1/surah/' + surahNumber + '/editions/quran-uthmani,en.asad,bn.bengali').then(
+				response => {
 					this.loading = true;
-					this.currentSurah = response.data.data[0];
-					this.loading = false;
-				});
+					this.currentSurah = response.data.data;
+					this.loading = false
+				})
 		}
 	}
 }
